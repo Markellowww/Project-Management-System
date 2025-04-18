@@ -13,6 +13,11 @@
 	</header>
 	<div class="content">
 		<div class="projects-container">
+			<div class="project-add">
+				<a href="${springMacroRequestContext.contextPath}/projects/new" class="project-add-btn">
+					+
+				</a>
+			</div>
 			<#list projects as project>
 				<div class="project">
 					<div class="project-title">

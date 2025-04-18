@@ -13,5 +13,5 @@ public class Project {
     private Long id;
     private String title;
     private String description;
-    private int year;
+    private int date;
 }
