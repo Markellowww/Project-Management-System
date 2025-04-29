@@ -1,8 +1,8 @@
 package com.markelloww.projectmanagement.service;
 
-import com.markelloww.projectmanagement.model.User;
 import com.markelloww.projectmanagement.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,13 +18,15 @@ public class NewUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(user.getPassword())
-                .build();
+    public UserDetails loadUserByUsername(String email) {
+        return userRepository.findByEmail(email)
+                .map(user -> User.builder()
+                        .username(user.getEmail())
+                        .password(user.getPassword())
+                        .accountExpired(false)
+                        .credentialsExpired(false)
+                        .accountLocked(false)
+                        .build())
+                .orElse(null);
     }
 }
