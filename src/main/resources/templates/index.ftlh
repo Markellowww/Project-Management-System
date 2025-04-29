@@ -8,13 +8,14 @@
 </head>
 <body>
 	<header class="header">
+		<div class="hello-msg">${userEmail}</div>
 		<div class="dead-line">{Deadline}</div>
 		<div class="profile">{Профиль}</div>
 	</header>
 	<div class="content">
 		<div class="projects-container">
 			<div class="project-add">
-				<a href="${springMacroRequestContext.contextPath}/projects/new" class="project-add-btn">
+				<a href="${springMacroRequestContext.contextPath}/project/new" class="project-add-btn">
 					+
 				</a>
 			</div>
