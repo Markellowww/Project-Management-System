@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,7 @@ public class NewUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .map(user -> User.builder()
                         .username(user.getEmail())
@@ -25,7 +26,8 @@ public class NewUserDetailsService implements UserDetailsService {
                         .accountExpired(false)
                         .credentialsExpired(false)
                         .accountLocked(false)
+                        .disabled(false)
                         .build())
-                .orElse(null);
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь с email " + email + " не найден"));
     }
 }

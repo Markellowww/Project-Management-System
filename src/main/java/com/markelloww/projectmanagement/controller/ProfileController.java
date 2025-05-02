@@ -46,6 +46,10 @@ public class ProfileController {
             @RequestParam String currentPassword,
             Principal principal,
             RedirectAttributes redirectAttributes) {
+        if (principal == null) {
+            redirectAttributes.addFlashAttribute("error", "Пользователь не найден");
+            return "redirect:/profile";
+        }
         User user = userService.findByEmail(principal.getName());
         if (user == null) {
             redirectAttributes.addFlashAttribute("error", "Пользователь не найден");

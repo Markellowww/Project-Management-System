@@ -31,7 +31,9 @@
         <a href="/reg" class="register-link">Зарегистрироваться</a>
 
         <#if error??>
-            <div class="error-message">${error}</div>
+            <div class="error-message">
+                ${error}
+            </div>
         </#if>
     </div>
 </body>
