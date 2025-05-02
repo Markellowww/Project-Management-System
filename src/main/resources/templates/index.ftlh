@@ -8,8 +8,14 @@
 </head>
 <body>
 	<header class="header">
-		<div class="hello-msg">${userEmail}</div>
-		<div class="dead-line">{Deadline}</div>
+		<div class="hello-msg">
+			Привет, ${userEmail}
+		</div>
+		<div class="choose-team">
+			<h3>
+				Выберите команду
+			</h3>
+		</div>
 		<div class="profile">
 			<a href="${springMacroRequestContext.contextPath}/profile" class="profile-link">
 				Профиль
@@ -17,21 +23,21 @@
 		</div>
 	</header>
 	<div class="content">
-		<div class="projects-container">
-			<div class="project-add">
-				<a href="${springMacroRequestContext.contextPath}/project/new" class="project-add-btn">
+		<div class="module-container">
+			<div class="module-add">
+				<a href="${springMacroRequestContext.contextPath}/project/new" class="module-add-btn">
 					+
 				</a>
 			</div>
 			<#list projects as project>
-				<div class="project">
-					<div class="project-title">
+				<div class="module">
+					<div class="module-title">
 						${project.title}
 					</div>
-					<div class="project-description">
+					<div class="module-description">
 						${project.description}
 					</div>
-					<a href="${springMacroRequestContext.contextPath}/projects/${project.id}" class="project-button">
+					<a href="${springMacroRequestContext.contextPath}/projects/${project.id}" class="module-button">
 						Перейти к проекту
 					</a>
 				</div>
