@@ -43,6 +43,8 @@ public class AuthController {
     @Transactional
     public String regUser(@RequestParam("username") String username,
                                @RequestParam("password") String password,
+                               @RequestParam("firstname") String firstname,
+                               @RequestParam("lastname") String lastname,
                                RedirectAttributes redirectAttributes) {
         if (userRepository.findByEmail(username).isPresent()) {
             redirectAttributes.addAttribute("msg", "error");
@@ -50,6 +52,8 @@ public class AuthController {
         }
 
         User user = new User();
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
         user.setEmail(username);
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);

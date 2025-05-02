@@ -16,16 +16,26 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <div class="form-group">
+                <label for="firstname">Имя</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Введите имя" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname">Фамилия</label>
+                <input type="text" id="lastname" name="lastname" placeholder="Введите фамилию" required>
+            </div>
+
+            <div class="form-group">
                 <label for="email">Почта</label>
-                <input type="email" id="email" name="username" placeholder="E-mail" required>
+                <input type="email" id="email" name="username" placeholder="Введите e-mail" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
             </div>
 
-            <input type="submit" value="Зарегистроваться">
+            <input type="submit" value="Зарегистрироваться">
         </form>
 
         <a href="/login" class="login-link">Войти</a>

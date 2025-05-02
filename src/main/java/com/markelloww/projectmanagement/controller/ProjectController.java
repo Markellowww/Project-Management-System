@@ -2,6 +2,7 @@ package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Project;
 import com.markelloww.projectmanagement.service.ProjectService;
+import com.markelloww.projectmanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,12 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class ProjectController {
     private final ProjectService projectService;
+    private final UserService userService;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
         String email = principal.getName();
-        model.addAttribute("userEmail", email);
+        model.addAttribute("firstname", userService.getFirstNameByEmail(email));
         model.addAttribute("projects", projectService.getProjects());
         return "index";
     }

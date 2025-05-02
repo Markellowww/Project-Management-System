@@ -9,7 +9,7 @@
 <body>
 	<header class="header">
 		<div class="hello-msg">
-			Привет, ${userEmail}
+			Привет, ${firstname}!
 		</div>
 		<div class="choose-team">
 			<h3>
@@ -17,7 +17,7 @@
 			</h3>
 		</div>
 		<div class="profile">
-			<a href="${springMacroRequestContext.contextPath}/profile" class="profile-link">
+			<a href="${springMacroRequestContext.contextPath}/profile" class="header-link">
 				Профиль
 			</a>
 		</div>

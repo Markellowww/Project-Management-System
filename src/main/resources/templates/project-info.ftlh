@@ -11,11 +11,9 @@
         <div class="dead-line">{Deadline}</div>
         <div class="profile">{Профиль}</div>
     </header>
-
     <br>
     <br>
     <br>
-
     <div>
         <div class="project-title">
             ${project.title}
