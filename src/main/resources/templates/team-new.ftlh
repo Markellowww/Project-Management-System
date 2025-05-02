@@ -12,13 +12,12 @@
         <div class="profile">{Профиль}</div>
     </header>
     <div>
-        <form action="/project/new" method="post">
+        <form action="/team/new" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <br><br><br>
-            Название: <input type="text" name="title"/><br>
+            Название: <input type="text" name="name"/><br>
             Описание: <input type="text" name="description"/><br>
-            Дата: <input type="number" name="date"/><br>
-            <input type="submit" value="Добавить проект"/>
+            <input type="submit" value="Создать команду"/>
         </form>
     </div>
 </body>

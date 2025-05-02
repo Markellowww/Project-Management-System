@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ProjectService {
     private final ProjectRepository projectRepository;
 
@@ -23,12 +22,10 @@ public class ProjectService {
     }
 
     public void addProject(Project project) {
-        log.info("Saving project: {}", project);
         projectRepository.save(project);
     }
 
     public void removeProject(Long id) {
-        log.info("Deleting by id: {}", id);
         projectRepository.deleteById(id);
     }
 

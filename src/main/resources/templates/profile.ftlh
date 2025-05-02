@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="header">
-        <div class="hello-msg">
+        <div class="left-msg">
             Привет, ${firstname}!
         </div>
         <div class="choose-team">
@@ -23,7 +23,53 @@
         </div>
     </header>
     <div class="content">
+        <div class="profile-settings">
+            <form action="${springMacroRequestContext.contextPath}/profile" method="post" class="profile-form">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="${email}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstname">Имя:</label>
+                    <input type="text" id="firstname" name="firstname" value="${firstname}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Фамилия:</label>
+                    <input type="text" id="lastname" name="lastname" value="${lastname}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Новый пароль (оставьте пустым, если не хотите менять):</label>
+                    <input type="password" id="newPassword" name="newPassword">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Подтвердите новый пароль:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentPassword">Текущий пароль (для подтверждения изменений):</label>
+                    <input type="password" id="currentPassword" name="currentPassword" required>
+                </div>
+
+                <button type="submit" class="save-btn">Сохранить изменения</button>
+            </form>
+            <#if error??>
+                <div class="error-message">
+                    ${error}
+                </div>
+            </#if>
+            <#if success??>
+                <div class="success-message">
+                    ${success}
+                </div>
+            </#if>
+        </div>
     </div>
 </body>
 </html>

@@ -8,21 +8,27 @@
 </head>
 <body>
     <header class="header">
-        <div class="dead-line">{Deadline}</div>
-        <div class="profile">{Профиль}</div>
+        <div class="left-msg">
+            Выбрана команда «${teamName}»!
+        </div>
+        <div class="profile">
+            <a href="${springMacroRequestContext.contextPath}/" class="header-link">
+                Назад
+            </a>
+        </div>
     </header>
     <br>
     <br>
     <br>
     <div>
-        <div class="project-title">
-            ${project.title}
+        <div class="module-title">
+            ${team.name}
         </div>
-        <div class="project-description">
-            ${project.description}
+        <div class="module-description">
+            ${team.description}
         </div>
-        <div class="project-date">
-            ${project.date}
+        <div class="module-date">
+            ${team.id}
         </div>
     </div>
 </body>

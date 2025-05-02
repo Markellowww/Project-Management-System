@@ -8,7 +8,7 @@
 </head>
 <body>
 	<header class="header">
-		<div class="hello-msg">
+		<div class="left-msg">
 			Привет, ${firstname}!
 		</div>
 		<div class="choose-team">
@@ -25,20 +25,20 @@
 	<div class="content">
 		<div class="module-container">
 			<div class="module-add">
-				<a href="${springMacroRequestContext.contextPath}/project/new" class="module-add-btn">
+				<a href="${springMacroRequestContext.contextPath}/team/new" class="module-add-btn">
 					+
 				</a>
 			</div>
-			<#list projects as project>
+			<#list teams as team>
 				<div class="module">
 					<div class="module-title">
-						${project.title}
+						${team.name}
 					</div>
 					<div class="module-description">
-						${project.description}
+						${team.description}
 					</div>
-					<a href="${springMacroRequestContext.contextPath}/projects/${project.id}" class="module-button">
-						Перейти к проекту
+					<a href="${springMacroRequestContext.contextPath}/team/${team.id}" class="module-button">
+						Перейти к команде
 					</a>
 				</div>
 			</#list>
