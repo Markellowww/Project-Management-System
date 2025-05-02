@@ -2,11 +2,9 @@ package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.User;
 import com.markelloww.projectmanagement.repository.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/reg")
+    @Transactional
     public String regUser(@RequestParam("username") String username,
                                @RequestParam("password") String password,
                                RedirectAttributes redirectAttributes) {
