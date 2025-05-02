@@ -35,10 +35,13 @@ public class WebSecurityConfig {
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
-/*                .logout((logout) -> logout
-                        .logoutSuccessUrl("/login")
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
-                )*/
+                )
                 .exceptionHandling((exception) -> exception
                         .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
                 );

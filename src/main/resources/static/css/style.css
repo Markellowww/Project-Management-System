@@ -142,9 +142,6 @@
     background-color: #8C8C8C;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-
-/* PROFILE SETTINGS IN DEVELOP */
 .profile-settings {
     max-width: 600px;
     margin: 80px auto 40px;
@@ -205,4 +202,37 @@
 }
 .save-btn:hover {
     background-color: #0056b3;
+}
+.logout-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+}
+.logout-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.logout-link {
+    display: inline-block;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+    text-decoration: none;
+    outline: none;
+    background: none;
+    border: none;
+    padding: 0;
+}
+.logout-link form {
+    margin: 0;
+    padding: 0;
 }

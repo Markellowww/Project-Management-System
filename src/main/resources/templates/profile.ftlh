@@ -8,8 +8,11 @@
 </head>
 <body>
     <header class="header">
-        <div class="left-msg">
-            Привет, ${firstname}!
+        <div class="logout-link">
+            <form action="${springMacroRequestContext.contextPath}/logout" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="logout-btn">Выйти</button>
+            </form>
         </div>
         <div class="choose-team">
             <h3>
