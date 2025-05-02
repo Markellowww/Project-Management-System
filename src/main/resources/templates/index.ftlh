@@ -10,7 +10,11 @@
 	<header class="header">
 		<div class="hello-msg">${userEmail}</div>
 		<div class="dead-line">{Deadline}</div>
-		<div class="profile">{Профиль}</div>
+		<div class="profile">
+			<a href="${springMacroRequestContext.contextPath}/profile" class="profile-link">
+				Профиль
+			</a>
+		</div>
 	</header>
 	<div class="content">
 		<div class="projects-container">

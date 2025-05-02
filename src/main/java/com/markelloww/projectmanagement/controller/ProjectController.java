@@ -21,22 +21,12 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping("/")
-    public String index(Model model,
-                        Principal principal) {
+    public String index(Model model, Principal principal) {
         String email = principal.getName();
         model.addAttribute("userEmail", email);
         model.addAttribute("projects", projectService.getProjects());
         return "index";
     }
-
-//    @GetMapping("/")
-//    public String homePage(Principal principal, Model model) {
-//        if (principal != null) {
-//            String email = principal.getName(); // Получаем email (username)
-//            model.addAttribute("email", email);
-//        }
-//        return "index";
-//    }
 
     @GetMapping("/project/new")
     public String showCreateForm() {
