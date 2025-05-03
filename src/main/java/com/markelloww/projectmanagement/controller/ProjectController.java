@@ -1,17 +1,12 @@
 package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Project;
-import com.markelloww.projectmanagement.model.Team;
-import com.markelloww.projectmanagement.model.User;
-import com.markelloww.projectmanagement.repository.UserRepository;
 import com.markelloww.projectmanagement.service.ProjectService;
 import com.markelloww.projectmanagement.service.TeamService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -26,10 +21,20 @@ public class ProjectController {
     private final TeamService teamService;
     private final ProjectService projectService;
 
+    @GetMapping("/{projectId}")
+    public String projectInfo(@PathVariable Long projectId,
+                              @PathVariable Long teamId,
+                              Principal principal,
+                              Model model) {
+        if (!teamService.checkUser(teamId, principal.getName())) {
+            return "redirect:/";
+        }
+        model.addAttribute("project", projectService.getProjectById(projectId));
+        return "project-info";
+    }
+
     @GetMapping("/new")
-    public String showProjectCreate(@PathVariable Long teamId,
-                                    Model model,
-                                    Principal principal) {
+    public String showProjectCreate(@PathVariable Long teamId, Model model, Principal principal) {
         if (!teamService.checkUser(teamId, principal.getName())) {
             return "redirect:/";
         }

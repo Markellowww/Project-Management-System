@@ -10,15 +10,10 @@
 <body>
     <header class="header">
         <div class="left-msg">
-            Выбрана команда «${team.getName()}»!
+            Выбрана команда «${project.team.name}», проект «${project.title}»
         </div>
-<#--        <div class="choose-module">-->
-<#--            <h3>-->
-<#--                Выберите проект-->
-<#--            </h3>-->
-<#--        </div>-->
         <div class="profile">
-            <a href="${springMacroRequestContext.contextPath}/${team.id}" class="header-link">
+            <a href="${springMacroRequestContext.contextPath}/team/${project.team.id}" class="header-link">
                 Назад
             </a>
         </div>
