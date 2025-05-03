@@ -6,6 +6,7 @@ import com.markelloww.projectmanagement.repository.UserRepository;
 import com.markelloww.projectmanagement.service.TeamService;
 import com.markelloww.projectmanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -24,39 +25,18 @@ import java.security.Principal;
 public class TeamController {
     private final UserService userService;
     private final TeamService teamService;
-    private final UserRepository userRepository;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
-        String email = principal.getName();
-        model.addAttribute("firstname", userService.getUserNameByEmail(email));
+        model.addAttribute("user", userService.getUserByEmail(principal.getName()));
         model.addAttribute("teams", teamService.getTeams());
         return "index";
     }
 
     @GetMapping("/team/new")
     public String teamCreateForm(Model model, Principal principal) {
-        String email = principal.getName();
-        model.addAttribute("firstname", userService.getUserNameByEmail(email));
+        model.addAttribute("user", userService.getUserByEmail(principal.getName()));
         return "team-new";
-    }
-
-    @GetMapping("/team/{id}")
-    public String teamInfo(@PathVariable Long id, Model model, Principal principal) {
-        Team team = teamService.getTeamById(id);
-        if (team == null) {
-            return "redirect:/";
-        }
-        User user = userRepository.findByEmail(principal.getName())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        model.addAttribute("team", team);
-        model.addAttribute("projects", team.getProjects());
-        model.addAttribute("email", principal.getName());
-        model.addAttribute("user", user);
-        model.addAttribute("isOwner", team.getOwner().getId().equals(user.getId()));
-        model.addAttribute("isMember", team.getMembers().stream()
-                .anyMatch(member -> member.getId().equals(user.getId())));
-        return "team-info";
     }
 
     @PostMapping("/team/new")
@@ -65,35 +45,39 @@ public class TeamController {
         return "redirect:/";
     }
 
-    @PostMapping("/team/{id}/delete")
-    public String deleteTeam(@PathVariable Long id, Principal principal) {
-        String email = principal.getName();
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Team team = teamService.getTeamById(id);
-        if (team != null && team.getOwner().getId().equals(user.getId())) {
-            teamService.deleteTeam(id);
-        }
+    @GetMapping("/team/{teamId}")
+    public String teamInfo(@PathVariable Long teamId, Model model, Principal principal) {
+        Team team = teamService.getTeamById(teamId);
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("team", team);
+        model.addAttribute("user", user);
+        model.addAttribute("isOwner", team.getOwner().getId().equals(user.getId()));
+        model.addAttribute("isMember", team.getMembers().stream()
+                .anyMatch(member -> member.getId().equals(user.getId())));
+        return "team-info";
+    }
+
+    @PostMapping("/team/{teamId}/delete")
+    public String deleteTeam(@PathVariable Long teamId, Principal principal) {
+        teamService.deleteTeam(teamId, principal);
         return "redirect:/";
     }
 
-    @PostMapping("/team/{id}/join")
-    public String joinTeam(@PathVariable Long id, Principal principal) {
-        teamService.joinTeam(id, principal.getName());
-        return "redirect:/team/" + id;
+    @PostMapping("/team/{teamId}/join")
+    public String joinTeam(@PathVariable Long teamId, Principal principal) {
+        teamService.joinTeam(teamId, userService.getUserByEmail(principal.getName()));
+        return "redirect:/team/" + teamId;
     }
 
-    @PostMapping("/team/{id}/leave")
-    public String leaveTeam(@PathVariable Long id, Principal principal) {
-        teamService.leaveTeam(id, principal.getName());
-        return "redirect:/team/" + id;
+    @PostMapping("/team/{teamId}/leave")
+    public String leaveTeam(@PathVariable Long teamId, Principal principal) {
+        teamService.leaveTeam(teamId, userService.getUserByEmail(principal.getName()));
+        return "redirect:/team/" + teamId;
     }
 
     @PostMapping("/team/{teamId}/kick/{userId}")
     public String removeMember(@PathVariable Long teamId, @PathVariable Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        teamService.leaveTeam(teamId, user.getEmail());
+        teamService.leaveTeam(teamId, userService.getUserById(userId));
         return "redirect:/team/" + teamId;
     }
 }

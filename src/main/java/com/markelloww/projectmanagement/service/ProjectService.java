@@ -1,11 +1,15 @@
 package com.markelloww.projectmanagement.service;
 
 import com.markelloww.projectmanagement.model.Project;
+import com.markelloww.projectmanagement.model.Team;
+import com.markelloww.projectmanagement.model.User;
 import com.markelloww.projectmanagement.repository.ProjectRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.security.Principal;
+import java.time.LocalDateTime;
 
 /**
  * @Author: Markelloww
@@ -15,20 +19,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
+    private final TeamService teamService;
+    private final UserService userService;
 
-    public List<Project> getProjects() {
-        return projectRepository.findAll();
-    }
-
-    public void addProject(Project project) {
+    @Transactional
+    public void createProject(Project project, Long teamId, Principal principal) {
+        Team team = teamService.getTeamById(teamId);
+        User user = userService.getUserByEmail(principal.getName());
+        project.setTeam(team);
+        project.setStartDate(LocalDateTime.now());
+        project.setOwner(user);
         projectRepository.save(project);
-    }
-
-    public void removeProject(Long id) {
-        projectRepository.deleteById(id);
-    }
-
-    public Project getProjectById(Long id) {
-        return projectRepository.findById(id).orElse(null);
     }
 }

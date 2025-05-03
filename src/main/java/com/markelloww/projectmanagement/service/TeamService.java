@@ -24,19 +24,26 @@ public class TeamService {
     private final TeamRepository teamRepository;
     private final UserRepository userRepository;
     private final ParameterNamesModule parameterNamesModule;
+    private final UserService userService;
 
     public List<Team> getTeams() {
         return teamRepository.findAll();
     }
 
     public Team getTeamById(Long id) {
-        return teamRepository.findById(id).orElse(null);
+        return teamRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
+    }
+
+    public boolean checkUser(Long teamId, String email) {
+        Team team = getTeamById(teamId);
+        User user = userService.getUserByEmail(email);
+        return team != null && team.getMembers().contains(user);
     }
 
     @Transactional
     public void createTeam(Team team, Principal principal) {
-        User owner = userRepository.findByEmail(principal.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User owner = userService.getUserByEmail(principal.getName());
         team.setOwner(owner);
         Team savedTeam = teamRepository.save(team);
         savedTeam.addMember(owner);
@@ -44,24 +51,20 @@ public class TeamService {
     }
 
     @Transactional
-    public void deleteTeam(Long teamId) {
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
-
-        for (User member : new HashSet<>(team.getMembers())) {
-            team.removeMember(member);
+    public void deleteTeam(Long teamId, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        Team team = getTeamById(teamId);
+        if (team.getOwner().getId().equals(user.getId())) {
+            for (User member : new HashSet<>(team.getMembers())) {
+                team.removeMember(member);
+            }
+            teamRepository.delete(team);
         }
-
-        teamRepository.delete(team);
     }
 
     @Transactional
-    public void joinTeam(Long teamId, String email) {
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
+    public void joinTeam(Long teamId, User user) {
+        Team team = getTeamById(teamId);
         if (!team.getMembers().contains(user)) {
             team.addMember(user);
             teamRepository.save(team);
@@ -69,12 +72,8 @@ public class TeamService {
     }
 
     @Transactional
-    public void leaveTeam(Long teamId, String email) {
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
+    public void leaveTeam(Long teamId, User user) {
+        Team team = getTeamById(teamId);
         if (team.getMembers().contains(user) && !team.getOwner().equals(user)) {
             team.removeMember(user);
             teamRepository.save(team);

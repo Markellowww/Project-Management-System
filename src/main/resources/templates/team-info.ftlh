@@ -27,13 +27,13 @@
         <div class="module-info">
             <div class="form-group">
                 <h3>
-                    Команда: «${team.getName()}»
+                    Команда: «${team.name}»
                 </h3>
                 <h3>
-                Владелец: ${team.getOwner().getFirstname()} ${team.getOwner().getLastname()}
+                    Владелец: ${team.owner.firstname} ${team.owner.lastname}
                 </h3>
                 <h3>
-                    Описание: «${team.getDescription()}»
+                    Описание: «${team.description}»
                 </h3>
                 <h3>
                     Участники: <span id="membersCount">${team.getMembers()?size}</span>
@@ -72,7 +72,7 @@
                         +
                     </a>
                 </div>
-                <#list projects as project>
+                <#list team.projects as project>
                     <div class="module">
                         <div class="module-title">
                             ${project.title}
@@ -92,10 +92,10 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 class="modal-title">
-                Участники команды «${team.getName()}»
+                Участники команды «${team.name}»
             </h2>
             <div class="members-list">
-                <#list team.getMembers() as member>
+                <#list team.members as member>
                     <div class="member-item">
                         ${member?index + 1}. ${member.firstname} ${member.lastname}
                         <#if isOwner && member.id != user.id>

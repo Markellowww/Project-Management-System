@@ -9,7 +9,7 @@
 <body>
 	<header class="header">
 		<div class="left-msg">
-			Привет, ${firstname}!
+			Привет, ${user.firstname}!
 		</div>
 		<div class="choose-module">
 			<h3>

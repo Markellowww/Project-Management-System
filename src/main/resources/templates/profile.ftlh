@@ -32,17 +32,17 @@
 
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="${email}" required>
+                    <input type="email" id="email" name="email" value="${user.email}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="firstname">Имя:</label>
-                    <input type="text" id="firstname" name="firstname" value="${firstname}" required>
+                    <input type="text" id="firstname" name="firstname" value="${user.firstname}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="lastname">Фамилия:</label>
-                    <input type="text" id="lastname" name="lastname" value="${lastname}" required>
+                    <input type="text" id="lastname" name="lastname" value="${user.lastname}" required>
                 </div>
 
                 <div class="form-group">

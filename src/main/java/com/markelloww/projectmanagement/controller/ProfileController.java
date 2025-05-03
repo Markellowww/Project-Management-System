@@ -29,10 +29,7 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String profilePage(Model model, Principal principal) {
-        User user = userService.findByEmail(principal.getName());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("firstname", user.getFirstname());
-        model.addAttribute("lastname", user.getLastname());
+        model.addAttribute("user", userService.getUserByEmail(principal.getName()));
         return "profile";
     }
 
@@ -46,15 +43,7 @@ public class ProfileController {
             @RequestParam String currentPassword,
             Principal principal,
             RedirectAttributes redirectAttributes) {
-        if (principal == null) {
-            redirectAttributes.addFlashAttribute("error", "Пользователь не найден");
-            return "redirect:/profile";
-        }
-        User user = userService.findByEmail(principal.getName());
-        if (user == null) {
-            redirectAttributes.addFlashAttribute("error", "Пользователь не найден");
-            return "redirect:/profile";
-        }
+        User user = userService.getUserByEmail(principal.getName());
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
             redirectAttributes.addFlashAttribute("error", "Введен неверный пароль");
             return "redirect:/profile";
@@ -64,6 +53,7 @@ public class ProfileController {
                 redirectAttributes.addFlashAttribute("error", "Такой e-mail уже занят");
                 return "redirect:/profile";
             }
+            user.setEmail(email);
         }
         if (newPassword != null && !newPassword.isEmpty()) {
             if (!newPassword.equals(confirmPassword)) {
@@ -72,7 +62,6 @@ public class ProfileController {
             }
             user.setPassword(passwordEncoder.encode(newPassword));
         }
-        user.setEmail(email);
         user.setFirstname(firstname);
         user.setLastname(lastname);
         userRepository.save(user);

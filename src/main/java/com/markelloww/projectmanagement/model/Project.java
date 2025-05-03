@@ -42,4 +42,8 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     private Set<Task> tasks = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
 }
