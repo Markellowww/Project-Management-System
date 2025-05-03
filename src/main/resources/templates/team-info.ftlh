@@ -65,34 +65,51 @@
                 </#if>
             </div>
         </div>
-        <div class="module-container">
-            <div class="module-add">
-                <a href="${springMacroRequestContext.contextPath}/team/${team.id}/project/new" class="module-add-btn">
-                    +
-                </a>
+        <#if isMember>
+            <div class="module-container">
+                <div class="module-add">
+                    <a href="${springMacroRequestContext.contextPath}/team/${team.id}/project/new" class="module-add-btn">
+                        +
+                    </a>
+                </div>
+                <#list projects as project>
+                    <div class="module">
+                        <div class="module-title">
+                            ${project.title}
+                        </div>
+                        <div class="module-description">
+                            ${project.description}
+                        </div>
+                        <a href="${springMacroRequestContext.contextPath}/team/${team.id}/project/${project.id}" class="module-button">
+                            Перейти к проекту
+                        </a>
+                    </div>
+                </#list>
             </div>
-<#--                    <#list projects as project>-->
-<#--                        <div class="module">-->
-<#--                            <div class="module-title">-->
-<#--                                ${team.name}-->
-<#--                            </div>-->
-<#--                            <div class="module-description">-->
-<#--                                ${team.description}-->
-<#--                            </div>-->
-<#--                            <a href="${springMacroRequestContext.contextPath}/team/${team.id}" class="module-button">-->
-<#--                                Перейти к команде-->
-<#--                            </a>-->
-<#--                        </div>-->
-<#--                    </#list>-->
-        </div>
+        </#if>
     </div>
     <div id="membersModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title">Участники команды «${team.getName()}»</h2>
+            <h2 class="modal-title">
+                Участники команды «${team.getName()}»
+            </h2>
             <div class="members-list">
                 <#list team.getMembers() as member>
-                    <div class="member-item">${member?index + 1}. ${member.firstname} ${member.lastname}</div>
+                    <div class="member-item">
+                        ${member?index + 1}. ${member.firstname} ${member.lastname}
+                        <#if isOwner && member.id != user.id>
+                            <form action="/team/${team.id}/kick/${member.id}"
+                                  method="post"
+                                  style="display: inline;">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button type="submit" class="remove-member-btn"
+                                        onclick="return confirm('Выгнать ${member.firstname} ${member.lastname}?')">
+                                    ×
+                                </button>
+                            </form>
+                        </#if>
+                    </div>
                 </#list>
             </div>
         </div>

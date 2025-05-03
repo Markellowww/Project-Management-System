@@ -51,6 +51,7 @@ public class TeamController {
         User user = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         model.addAttribute("team", team);
+        model.addAttribute("projects", team.getProjects());
         model.addAttribute("email", principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("isOwner", team.getOwner().getId().equals(user.getId()));
@@ -68,10 +69,10 @@ public class TeamController {
     @PostMapping("/team/{id}/delete")
     public String deleteTeam(@PathVariable Long id, Principal principal) {
         String email = principal.getName();
-        User currentUser = userRepository.findByEmail(email)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Team team = teamService.getTeamById(id);
-        if (team != null && team.getOwner().getId().equals(currentUser.getId())) {
+        if (team != null && team.getOwner().getId().equals(user.getId())) {
             teamService.deleteTeam(id);
         }
         return "redirect:/";
@@ -87,5 +88,13 @@ public class TeamController {
     public String leaveTeam(@PathVariable Long id, Principal principal) {
         teamService.leaveTeam(id, principal.getName());
         return "redirect:/team/" + id;
+    }
+
+    @PostMapping("/team/{teamId}/kick/{userId}")
+    public String removeMember(@PathVariable Long teamId, @PathVariable Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        teamService.leaveTeam(teamId, user.getEmail());
+        return "redirect:/team/" + teamId;
     }
 }
