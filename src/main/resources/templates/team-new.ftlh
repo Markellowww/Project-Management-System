@@ -8,17 +8,37 @@
 </head>
 <body>
     <header class="header">
-        <div class="dead-line">{Deadline}</div>
-        <div class="profile">{Профиль}</div>
+        <div class="left-msg">
+            Привет, ${firstname}!
+        </div>
+        <div class="choose-module">
+            <h3>
+                Создать команду
+            </h3>
+        </div>
+        <div class="profile">
+            <a href="${springMacroRequestContext.contextPath}/" class="header-link">
+                Назад
+            </a>
+        </div>
     </header>
-    <div>
-        <form action="/team/new" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <br><br><br>
-            Название: <input type="text" name="name"/><br>
-            Описание: <input type="text" name="description"/><br>
-            <input type="submit" value="Создать команду"/>
-        </form>
+    <div class="content">
+        <div class="module-info">
+            <form action="/team/new" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <div class="form-group">
+                    <label for="name">Название команды:</label>
+                    <input type="text" id="name" name="name" placeholder="Введите название" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="description">Описание:</label>
+                    <textarea id="description" name="description" placeholder="Введите описание" required
+                              rows="5" cols="50"></textarea>
+                </div>
+                <button type="submit" class="save-btn">Создать команду</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

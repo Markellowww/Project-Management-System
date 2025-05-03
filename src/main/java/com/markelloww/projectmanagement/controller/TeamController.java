@@ -36,7 +36,9 @@ public class TeamController {
     }
 
     @GetMapping("/team/new")
-    public String teamCreateForm() {
+    public String teamCreateForm(Model model, Principal principal) {
+        String email = principal.getName();
+        model.addAttribute("firstname", userService.getUserNameByEmail(email));
         return "team-new";
     }
 

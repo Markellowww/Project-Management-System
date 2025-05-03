@@ -26,7 +26,7 @@ public class Team {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 255)
     private String description;
 
     @ManyToMany
