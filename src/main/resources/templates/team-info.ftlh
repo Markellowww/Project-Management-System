@@ -17,18 +17,24 @@
             </a>
         </div>
     </header>
-    <br>
-    <br>
-    <br>
-    <div>
-        <div class="module-title">
-            ${team.name}
-        </div>
-        <div class="module-description">
-            ${team.description}
-        </div>
-        <div class="module-date">
-            ${team.id}
+    <div class="module-info">
+        <div class="form-group">
+            <h3>
+                Команда: «${teamName}»
+            </h3>
+            <h3>
+            Владелец: ${teamOwner}
+            </h3>
+            <h3>
+                Описание: «${teamDescription}»
+            </h3>
+            <h3>
+                Участники:
+<#--                <#list teamMembers as member>-->
+<#--                    <div>${member?index + 1}. ${member.firstname} ${member.lastname}</div>-->
+<#--                </#list>-->
+                IN DEVELOP
+            </h3>
         </div>
     </div>
 </body>

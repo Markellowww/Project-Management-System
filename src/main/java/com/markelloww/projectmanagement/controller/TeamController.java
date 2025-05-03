@@ -1,6 +1,8 @@
 package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Team;
+import com.markelloww.projectmanagement.model.User;
+import com.markelloww.projectmanagement.repository.UserRepository;
 import com.markelloww.projectmanagement.service.TeamService;
 import com.markelloww.projectmanagement.service.UserService;
 import jakarta.validation.Valid;
@@ -23,6 +25,7 @@ import java.security.Principal;
 public class TeamController {
     private final UserService userService;
     private final TeamService teamService;
+    private final UserRepository userRepository;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
@@ -44,13 +47,15 @@ public class TeamController {
             return "redirect:/";
         }
         model.addAttribute("teamName", team.getName());
-        model.addAttribute("team", team);
+        model.addAttribute("teamDescription", team.getDescription());
+        model.addAttribute("teamOwner",
+                team.getOwner().getFirstname() + " " + team.getOwner().getLastname());
         return "team-info";
     }
 
     @PostMapping("/team/new")
-    public String teamCreate(Team team) {
-        teamService.addTeam(team);
+    public String teamCreate(Team team, Principal principal) {
+        teamService.createTeam(team, principal);
         return "redirect:/";
     }
 }

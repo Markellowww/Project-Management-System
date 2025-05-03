@@ -26,8 +26,8 @@
         </div>
     </header>
     <div class="content">
-        <div class="profile-settings">
-            <form action="${springMacroRequestContext.contextPath}/profile" method="post" class="profile-form">
+        <div class="module-info">
+            <form action="${springMacroRequestContext.contextPath}/profile" method="post" class="module-form">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                 <div class="form-group">

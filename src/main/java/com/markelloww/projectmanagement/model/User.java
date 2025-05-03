@@ -1,9 +1,7 @@
 package com.markelloww.projectmanagement.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,10 +15,12 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -36,5 +36,6 @@ public class User {
     private String lastname;
 
     @ManyToMany(mappedBy = "members")
+    @ToString.Exclude
     private Set<Team> teams = new HashSet<>();
 }
