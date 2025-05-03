@@ -11,7 +11,7 @@
 		<div class="left-msg">
 			Привет, ${firstname}!
 		</div>
-		<div class="choose-team">
+		<div class="choose-module">
 			<h3>
 				Выберите команду
 			</h3>

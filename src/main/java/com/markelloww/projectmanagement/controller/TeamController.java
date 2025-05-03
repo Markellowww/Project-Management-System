@@ -50,6 +50,7 @@ public class TeamController {
         model.addAttribute("teamDescription", team.getDescription());
         model.addAttribute("teamOwner",
                 team.getOwner().getFirstname() + " " + team.getOwner().getLastname());
+        model.addAttribute("teamMembers", team.getMembers());
         return "team-info";
     }
 

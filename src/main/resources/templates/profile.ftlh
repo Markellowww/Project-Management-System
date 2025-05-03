@@ -14,7 +14,7 @@
                 <button type="submit" class="logout-btn">Выйти</button>
             </form>
         </div>
-        <div class="choose-team">
+        <div class="choose-module">
             <h3>
                 Настройки профиля
             </h3>
