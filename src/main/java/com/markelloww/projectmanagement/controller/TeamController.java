@@ -46,11 +46,7 @@ public class TeamController {
         if (team == null) {
             return "redirect:/";
         }
-        model.addAttribute("teamName", team.getName());
-        model.addAttribute("teamDescription", team.getDescription());
-        model.addAttribute("teamOwner",
-                team.getOwner().getFirstname() + " " + team.getOwner().getLastname());
-        model.addAttribute("teamMembers", team.getMembers());
+        model.addAttribute("team", team);
         return "team-info";
     }
 
