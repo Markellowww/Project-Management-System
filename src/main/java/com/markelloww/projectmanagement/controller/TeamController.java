@@ -5,7 +5,6 @@ import com.markelloww.projectmanagement.model.User;
 import com.markelloww.projectmanagement.repository.UserRepository;
 import com.markelloww.projectmanagement.service.TeamService;
 import com.markelloww.projectmanagement.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

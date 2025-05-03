@@ -3,7 +3,6 @@ package com.markelloww.projectmanagement.service;
 import com.markelloww.projectmanagement.model.Project;
 import com.markelloww.projectmanagement.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
