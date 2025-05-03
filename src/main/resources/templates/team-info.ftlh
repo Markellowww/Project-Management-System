@@ -39,6 +39,30 @@
                     Участники: <span id="membersCount">${team.getMembers()?size}</span>
                     <button class="members-btn" onclick="openModal()">Подробнее</button>
                 </h3>
+                <#if isMember>
+                    <div class="form-group">
+                        <#if isOwner>
+                            <form action="${springMacroRequestContext.contextPath}/team/${team.id}/delete" method="post"
+                                  onsubmit="return confirm('Вы уверены, что хотите удалить команду? Это действие нельзя отменить.');">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button type="submit" class="delete-btn">Удалить команду</button>
+                            </form>
+                        <#else>
+                            <form action="${springMacroRequestContext.contextPath}/team/${team.id}/leave" method="post"
+                                  onsubmit="return confirm('Вы уверены, что хотите удалить команду? Это действие нельзя отменить.');">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button type="submit" class="delete-btn">Покинуть команду</button>
+                            </form>
+                        </#if>
+                    </div>
+                <#else>
+                <div class="form-group">
+                    <form action="${springMacroRequestContext.contextPath}/team/${team.id}/join" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button type="submit" class="save-btn">Вступить в команду</button>
+                    </form>
+                </div>
+                </#if>
             </div>
         </div>
         <div class="module-container">

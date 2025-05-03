@@ -43,12 +43,19 @@ public class TeamController {
     }
 
     @GetMapping("/team/{id}")
-    public String teamInfo(@PathVariable Long id, Model model) {
+    public String teamInfo(@PathVariable Long id, Model model, Principal principal) {
         Team team = teamService.getTeamById(id);
         if (team == null) {
             return "redirect:/";
         }
+        User user = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
         model.addAttribute("team", team);
+        model.addAttribute("email", principal.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("isOwner", team.getOwner().getId().equals(user.getId()));
+        model.addAttribute("isMember", team.getMembers().stream()
+                .anyMatch(member -> member.getId().equals(user.getId())));
         return "team-info";
     }
 
@@ -56,5 +63,29 @@ public class TeamController {
     public String teamCreate(Team team, Principal principal) {
         teamService.createTeam(team, principal);
         return "redirect:/";
+    }
+
+    @PostMapping("/team/{id}/delete")
+    public String deleteTeam(@PathVariable Long id, Principal principal) {
+        String email = principal.getName();
+        User currentUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Team team = teamService.getTeamById(id);
+        if (team != null && team.getOwner().getId().equals(currentUser.getId())) {
+            teamService.deleteTeam(id);
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/team/{id}/join")
+    public String joinTeam(@PathVariable Long id, Principal principal) {
+        teamService.joinTeam(id, principal.getName());
+        return "redirect:/team/" + id;
+    }
+
+    @PostMapping("/team/{id}/leave")
+    public String leaveTeam(@PathVariable Long id, Principal principal) {
+        teamService.leaveTeam(id, principal.getName());
+        return "redirect:/team/" + id;
     }
 }

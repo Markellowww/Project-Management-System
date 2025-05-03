@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -42,14 +43,41 @@ public class TeamService {
         teamRepository.save(savedTeam);
     }
 
-//    @Transactional
-//    public void addMemberToTeam(Long teamId, Long userId) {
-//        Team team = teamRepository.findById(teamId)
-//                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//
-//        team.addMember(user);
-//
-//    }
+    @Transactional
+    public void deleteTeam(Long teamId) {
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
+
+        for (User member : new HashSet<>(team.getMembers())) {
+            team.removeMember(member);
+        }
+
+        teamRepository.delete(team);
+    }
+
+    @Transactional
+    public void joinTeam(Long teamId, String email) {
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (!team.getMembers().contains(user)) {
+            team.addMember(user);
+            teamRepository.save(team);
+        }
+    }
+
+    @Transactional
+    public void leaveTeam(Long teamId, String email) {
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new UsernameNotFoundException("Team not found"));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (team.getMembers().contains(user) && !team.getOwner().equals(user)) {
+            team.removeMember(user);
+            teamRepository.save(team);
+        }
+    }
 }
