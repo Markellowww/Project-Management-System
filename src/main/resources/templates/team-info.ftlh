@@ -10,7 +10,7 @@
 <body>
     <header class="header">
         <div class="left-msg">
-            Выбрана команда «${team.getName()}»
+            Выбрана команда «${team.name}»
         </div>
         <div class="choose-module">
             <h3>
