@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -38,5 +39,18 @@ public class ProjectService {
         project.setStartDate(LocalDateTime.now());
         project.setOwner(user);
         projectRepository.save(project);
+    }
+
+    @Transactional
+    public void deleteProject(Project project) {
+        project.getTasks().clear();
+        if (project.getTeam() != null) {
+            project.getTeam().getProjects().remove(project);
+            project.setTeam(null);
+        }
+        if (project.getOwner() != null) {
+            project.setOwner(null);
+        }
+        projectRepository.delete(project);
     }
 }

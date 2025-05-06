@@ -1,10 +1,7 @@
 package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Project;
-import com.markelloww.projectmanagement.service.ProjectService;
-import com.markelloww.projectmanagement.service.TaskService;
-import com.markelloww.projectmanagement.service.TaskStatusService;
-import com.markelloww.projectmanagement.service.TeamService;
+import com.markelloww.projectmanagement.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +25,7 @@ public class ProjectController {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final TaskStatusService taskStatusService;
     private final TaskService taskService;
+    private final UserService userService;
 
 
     @GetMapping("/{projectId}")
@@ -44,6 +42,8 @@ public class ProjectController {
         LocalDateTime end = project.getEndDate();
 
         model.addAttribute("project", project);
+        model.addAttribute("isOwner",
+                project.getTeam().getOwner().getEmail().equals(principal.getName()));
         model.addAttribute("tasks", project.getTasks());
         model.addAttribute("taskStatuses", taskStatusService.getTaskStatuses());
         model.addAttribute("timeLeft", Duration.between(start, end));
@@ -70,6 +70,12 @@ public class ProjectController {
             return "redirect:/";
         }
         projectService.createProject(project, teamId, principal);
+        return "redirect:/team/" + teamId;
+    }
+
+    @PostMapping("/{projectId}/delete")
+    public String deleteProject(@PathVariable Long teamId, @PathVariable Long projectId) {
+        projectService.deleteProject(projectService.getProjectById(projectId));
         return "redirect:/team/" + teamId;
     }
 }

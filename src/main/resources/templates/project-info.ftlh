@@ -66,6 +66,13 @@
                         <h3>Выполненные: ${taskStatus[4]}</h3>
                     </#if>
                 </#if>
+                <#if isOwner>
+                    <form action="${springMacroRequestContext.contextPath}/team/${project.team.id}/project/${project.id}/delete" method="post"
+                          onsubmit="return confirm('Вы уверены, что хотите удалить проект? Это действие нельзя отменить.');">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button type="submit" class="delete-btn">Удалить проект</button>
+                    </form>
+                </#if>
             </div>
         </div>
         <div class="module-container">
