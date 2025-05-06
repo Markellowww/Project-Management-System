@@ -25,9 +25,6 @@ public class TaskStatus {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @OneToMany(mappedBy = "status")
     private Set<Task> tasks = new HashSet<>();
 }

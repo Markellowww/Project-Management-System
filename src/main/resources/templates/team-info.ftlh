@@ -72,7 +72,7 @@
                         +
                     </a>
                 </div>
-                <#list team.projects as project>
+                <#list projects as project>
                     <div class="module">
                         <div class="module-title">
                             ${project.title}

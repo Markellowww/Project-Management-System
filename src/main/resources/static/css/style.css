@@ -339,3 +339,23 @@ textarea:focus {
     background-color: #f5f5f5;
     border-radius: 50%;
 }
+
+
+
+.status-select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+.save-status-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.save-status-btn:hover {
+    background-color: #45a049;
+}

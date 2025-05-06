@@ -2,6 +2,7 @@ package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Project;
 import com.markelloww.projectmanagement.service.ProjectService;
+import com.markelloww.projectmanagement.service.TaskStatusService;
 import com.markelloww.projectmanagement.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Author: Markelloww
@@ -20,6 +24,10 @@ import java.security.Principal;
 public class ProjectController {
     private final TeamService teamService;
     private final ProjectService projectService;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private final TaskStatusService taskStatusService;
+
+
 
     @GetMapping("/{projectId}")
     public String projectInfo(@PathVariable Long projectId,
@@ -29,7 +37,17 @@ public class ProjectController {
         if (!teamService.checkUser(teamId, principal.getName())) {
             return "redirect:/";
         }
-        model.addAttribute("project", projectService.getProjectById(projectId));
+
+        Project project = projectService.getProjectById(projectId);
+        LocalDateTime start = project.getStartDate();
+        LocalDateTime end = project.getEndDate();
+
+        model.addAttribute("project", project);
+        model.addAttribute("tasks", project.getTasks());
+        model.addAttribute("taskStatuses", taskStatusService.getTaskStatuses());
+        model.addAttribute("timeLeft", Duration.between(start, end));
+        model.addAttribute("startTime", start.format(formatter));
+        model.addAttribute("endTime", end.format(formatter));
         return "project-info";
     }
 

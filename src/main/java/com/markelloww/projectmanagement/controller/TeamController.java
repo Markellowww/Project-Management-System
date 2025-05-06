@@ -51,6 +51,7 @@ public class TeamController {
         User user = userService.getUserByEmail(principal.getName());
         model.addAttribute("team", team);
         model.addAttribute("user", user);
+        model.addAttribute("projects", team.getProjects());
         model.addAttribute("isOwner", team.getOwner().getId().equals(user.getId()));
         model.addAttribute("isMember", team.getMembers().stream()
                 .anyMatch(member -> member.getId().equals(user.getId())));
