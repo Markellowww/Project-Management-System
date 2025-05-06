@@ -29,7 +29,7 @@ public class Team {
     @Column(name = "description", length = 255)
     private String description;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "team_members",
             joinColumns = @JoinColumn(name = "team_id"),
@@ -38,7 +38,7 @@ public class Team {
     @ToString.Exclude
     private Set<User> members = new HashSet<>();
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Project> projects = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

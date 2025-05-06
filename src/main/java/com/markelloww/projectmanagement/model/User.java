@@ -35,7 +35,7 @@ public class User {
     @Column(name = "lastname")
     private String lastname;
 
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany(mappedBy = "members", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @ToString.Exclude
     private Set<Team> teams = new HashSet<>();
 }
