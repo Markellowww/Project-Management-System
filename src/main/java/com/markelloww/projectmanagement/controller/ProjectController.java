@@ -2,6 +2,7 @@ package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Project;
 import com.markelloww.projectmanagement.service.ProjectService;
+import com.markelloww.projectmanagement.service.TaskService;
 import com.markelloww.projectmanagement.service.TaskStatusService;
 import com.markelloww.projectmanagement.service.TeamService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class ProjectController {
     private final ProjectService projectService;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final TaskStatusService taskStatusService;
-
+    private final TaskService taskService;
 
 
     @GetMapping("/{projectId}")
@@ -48,6 +49,9 @@ public class ProjectController {
         model.addAttribute("timeLeft", Duration.between(start, end));
         model.addAttribute("startTime", start.format(formatter));
         model.addAttribute("endTime", end.format(formatter));
+
+        model.addAttribute("taskAmount", taskService.getTaskAmount(project));
+        model.addAttribute("taskStatus", taskService.getTaskStatusesAmount(project));
         return "project-info";
     }
 

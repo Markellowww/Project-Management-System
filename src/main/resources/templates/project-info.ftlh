@@ -42,6 +42,30 @@
                 <h3>
                     Описание: «${project.description}»
                 </h3>
+                <br>
+                <h3>
+                    Статистика по заданиям:
+                </h3>
+                <h3>
+                    Общее кол-во: ${taskAmount}
+                </h3>
+                <#if taskAmount gt 0>
+                    <#if taskStatus[1] gt 0>
+                        <h3>В разработке: ${taskStatus[1]}</h3>
+                    </#if>
+                    <#if taskStatus[0] gt 0>
+                        <h3>В рассмотрении: ${taskStatus[0]}</h3>
+                    </#if>
+                    <#if taskStatus[2] gt 0>
+                        <h3>Замороженные: ${taskStatus[2]}</h3>
+                    </#if>
+                    <#if taskStatus[3] gt 0>
+                        <h3>Отклоненные: ${taskStatus[3]}</h3>
+                    </#if>
+                    <#if taskStatus[4] gt 0>
+                        <h3>Выполненные: ${taskStatus[4]}</h3>
+                    </#if>
+                </#if>
             </div>
         </div>
         <div class="module-container">
