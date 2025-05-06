@@ -19,7 +19,7 @@
 </header>
     <div class="content">
         <div class="module-info">
-            <form action="${springMacroRequestContext.contextPath}/team/${project.team.id}/project/${project.id}/new" method="post">
+            <form action="${springMacroRequestContext.contextPath}/team/${project.team.id}/project/${project.id}/task/new" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="form-group">
                     <label for="title">Название задания:</label>

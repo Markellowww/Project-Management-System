@@ -77,7 +77,7 @@
         </div>
         <div class="module-container">
             <div class="module-add">
-                <a href="${springMacroRequestContext.contextPath}/team/${project.team.id}/project/${project.id}/new" class="module-add-btn">
+                <a href="${springMacroRequestContext.contextPath}/team/${project.team.id}/project/${project.id}/task/new" class="module-add-btn">
                     +
                 </a>
             </div>
@@ -105,6 +105,9 @@
                     </div>
                     <div class="module-description">
                         <button class="save-status-btn" data-task-id="${task.id}">Сохранить</button>
+                        <#if isOwner>
+                            <button class="delete-status-btn" data-task-id="${task.id}">Удалить</button>
+                        </#if>
                     </div>
                 </div>
             </#list>

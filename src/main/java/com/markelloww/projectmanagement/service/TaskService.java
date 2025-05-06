@@ -73,6 +73,13 @@ public class TaskService {
     }
 
     @Transactional
+    public void deleteTask(Task task, String email) {
+        if (task.getProject().getTeam().getOwner().getEmail().equals(email)) {
+            taskRepository.delete(task);
+        }
+    }
+
+    @Transactional
     public void updateStatus(Long taskId, Long statusId) {
         Task task = getTaskById(taskId);
         task.setStatus(taskStatusService.getTaskStatusById(statusId));
