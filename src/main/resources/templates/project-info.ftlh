@@ -97,7 +97,10 @@
                         Статус:
                         <select class="status-select" data-task-id="${task.id}" data-project-id="${project.id}">
                             <#list taskStatuses as status>
-                                <option value="${status.id}" <#if task.status?? && task.status.id == status.id>selected</#if>>
+                                <option value="${status.id}"
+                                        <#if task.status?? && task.status.id == status.id>
+                                            selected
+                                        </#if>>
                                     ${status.name}
                                 </option>
                             </#list>

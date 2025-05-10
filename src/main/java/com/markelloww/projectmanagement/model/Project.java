@@ -47,14 +47,4 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
-
-    public void addTask(Task task) {
-        tasks.add(task);
-        task.setProject(this);
-    }
-
-    public void removeTask(Task task) {
-        tasks.remove(task);
-        task.setProject(null);
-    }
 }

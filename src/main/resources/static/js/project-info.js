@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $('.save-status-btn').click(function() {
         const taskId = $(this).data('task-id');
-        const projectId = $('.status-select').data('project-id');
+        const projectId = $(this).closest('.module').find('.status-select').data('project-id');
         const teamId = window.location.pathname.split('/')[2];
-        const statusId = $('.status-select').val();
+        const statusId = $(this).closest('.module').find('.status-select').val();
         const csrfToken = $('#csrfToken').val();
 
         $.ajax({
@@ -24,9 +24,10 @@ $(document).ready(function() {
             }
         });
     });
+
     $('.delete-status-btn').click(function() {
         const taskId = $(this).data('task-id');
-        const projectId = $('.status-select').data('project-id');
+        const projectId = $(this).closest('.module').find('.status-select').data('project-id');
         const teamId = window.location.pathname.split('/')[2];
         const csrfToken = $('#csrfToken').val();
 
