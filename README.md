@@ -3,7 +3,7 @@
 **Language / Язык:**  
 [English](#english) | [Русский](#russian)
 
-[![Java](https://img.shields.io/badge/Java-22-orange?logo=openjdk)](https://openjdk.org/) [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.4-green?logo=springboot)](https://spring.io/projects/spring-boot) [![Spring Security](https://img.shields.io/badge/Spring%20Security-3.4.4-red?logo=springsecurity)](https://spring.io/projects/spring-security)[![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-3.4.4-brightgreen?logo=spring)](https://spring.io/projects/spring-data-jpa) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.7.5-blue?logo=postgresql)](https://www.postgresql.org/) [![FreeMarker](https://img.shields.io/badge/FreeMarker-2.3.32-yellow?logo=apache)](https://freemarker.apache.org/) [![Bean Validation](https://img.shields.io/badge/Bean%20Validation-3.0-purple?logo=java)](https://beanvalidation.org/) [![Lombok](https://img.shields.io/badge/Lombok-1.18.38-pink?logo=lombok)](https://projectlombok.org/) [![Maven](https://img.shields.io/badge/Maven-3.8+-blue?logo=apache-maven)](https://maven.apache.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)](https://openjdk.org/) [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.4-green?logo=springboot)](https://spring.io/projects/spring-boot) [![Spring Security](https://img.shields.io/badge/Spring%20Security-3.4.4-red?logo=springsecurity)](https://spring.io/projects/spring-security)[![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-3.4.4-brightgreen?logo=spring)](https://spring.io/projects/spring-data-jpa) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.7.5-blue?logo=postgresql)](https://www.postgresql.org/) [![FreeMarker](https://img.shields.io/badge/FreeMarker-2.3.32-yellow?logo=apache)](https://freemarker.apache.org/) [![Bean Validation](https://img.shields.io/badge/Bean%20Validation-3.0-purple?logo=java)](https://beanvalidation.org/) [![Lombok](https://img.shields.io/badge/Lombok-1.18.38-pink?logo=lombok)](https://projectlombok.org/) [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/) [![Maven](https://img.shields.io/badge/Maven-3.8+-blue?logo=apache-maven)](https://maven.apache.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <div id="english"></div>
 
@@ -24,7 +24,7 @@
 * **Backend:** Java 22, Spring Boot 3.4.4, Spring Security 3.4.4, Spring Data JPA 3.4.4
 * **Frontend:** FreeMarker, HTML, CSS, Vanilla JS
 * **Database:** PostgreSQL 42.7.5
-* **Build:** Maven
+* **Build:** Maven, Docker
 
 ## 📦 Getting Started
 
@@ -36,19 +36,13 @@ git clone https://github.com/Markellowww/Project-Management-System.git
 cd Project-Management-System
 ```
 
-2. **Build the project with Maven:**
+2. **Use Docker to run application:**
 ```bash
-./mvnw clean package
-# Or, if you're using Windows:
-# mvnw.cmd clean package
+docker compose up
+# docker-compose up 
 ```
 
-3. **Run the application:**
-```bash
-java -jar target/Project-Management-System-0.0.1-SNAPSHOT.jar
-```
-
-4. **Open a browser and navigate to:** [http://localhost:8080](http://localhost:8080)
+3. **Open a browser and navigate to:** [http://localhost:8080](http://localhost:8080)
 
 <div id="russian"></div>
 
@@ -69,7 +63,7 @@ java -jar target/Project-Management-System-0.0.1-SNAPSHOT.jar
 *   **Backend:** Java 22, Spring Boot 3.4.4, Spring Security 3.4.4, Spring Data JPA 3.4.4
 *   **Frontend:** FreeMarker, HTML, CSS, Vanilla JS
 *   **База данных:** PostgreSQL 42.7.5
-*   **Сборка:** Maven
+*   **Сборка:** Maven, Docker
 
 ## 📦 Начало работы
 
@@ -81,16 +75,9 @@ java -jar target/Project-Management-System-0.0.1-SNAPSHOT.jar
     cd Project-Management-System
     ```
 
-2.  **Соберите проект с помощью Maven:**
+2.  **Используйте Docker для запуска:**
     ```bash
-    ./mvnw clean package
-    # Или, если используете Windows:
-    # mvnw.cmd clean package
+    docker compose up
+    # docker-compose up 
     ```
-
-3.  **Запустите приложение:**
-    ```bash
-    java -jar target/Project-Management-System-0.0.1-SNAPSHOT.jar
-    ```
-
-4.  **Откройте браузер и перейдите по адресу:** [http://localhost:8080](http://localhost:8080)
+3.  **Откройте браузер и перейдите по адресу:** [http://localhost:8080](http://localhost:8080)
