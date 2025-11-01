@@ -11,7 +11,7 @@
 	<groupId>com.markelloww</groupId>
 	<artifactId>projectmanagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projectmanagement</name>
+	<name>project management</name>
 	<description>Project for spring university practice</description>
 	<url/>
 	<licenses>
@@ -66,11 +66,6 @@
 			<version>1.18.38</version>
 			<scope>provided</scope>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.security</groupId>-->
-<!--			<artifactId>spring-security-test</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>

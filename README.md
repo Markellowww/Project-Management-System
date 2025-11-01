@@ -32,8 +32,8 @@
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/Markellowww/University-Practice-2025.git
-cd University-Practice-2025
+git clone https://github.com/Markellowww/Project-Management-System.git
+cd Project-Management-System
 ```
 
 2. **Build the project with Maven:**
@@ -45,7 +45,7 @@ cd University-Practice-2025
 
 3. **Run the application:**
 ```bash
-java -jar target/University-Practice-2025-0.0.1-SNAPSHOT.jar
+java -jar target/Project-Management-System-0.0.1-SNAPSHOT.jar
 ```
 
 4. **Open a browser and navigate to:** [http://localhost:8080](http://localhost:8080)
@@ -77,8 +77,8 @@ java -jar target/University-Practice-2025-0.0.1-SNAPSHOT.jar
 
 1.  **Клонируйте репозиторий:**
     ```bash
-    git clone https://github.com/Markellowww/University-Practice-2025.git
-    cd University-Practice-2025
+    git clone https://github.com/Markellowww/Project-Management-System.git
+    cd Project-Management-System
     ```
 
 2.  **Соберите проект с помощью Maven:**
@@ -90,7 +90,7 @@ java -jar target/University-Practice-2025-0.0.1-SNAPSHOT.jar
 
 3.  **Запустите приложение:**
     ```bash
-    java -jar target/University-Practice-2025-0.0.1-SNAPSHOT.jar
+    java -jar target/Project-Management-System-0.0.1-SNAPSHOT.jar
     ```
 
 4.  **Откройте браузер и перейдите по адресу:** [http://localhost:8080](http://localhost:8080)
