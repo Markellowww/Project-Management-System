@@ -11,7 +11,7 @@
 
 **Summer Internship Project 2025.** A web application for managing projects, tasks, and teams, developed in Spring Boot.
 
-## 🚀 Functionality
+## Functionality
 
 * **User Management:** Registration, authentication, profile viewing.
 * **Project Management:** Creating, viewing, and editing projects.
@@ -19,14 +19,14 @@
 * **Team Management:** Forming teams and assigning members to projects.
 * **Role System:** Basic security system with access control.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * **Backend:** Java 22, Spring Boot 3.4.4, Spring Security 3.4.4, Spring Data JPA 3.4.4
 * **Frontend:** FreeMarker, HTML, CSS, Vanilla JS
 * **Database:** PostgreSQL 42.7.5
 * **Build:** Maven, Docker
 
-## 📦 Getting Started
+## Getting Started
 
 ### Installation and Run
 
@@ -50,7 +50,7 @@ docker compose up
 
 **Проект по летней практке 2025 года.** Веб-приложение для управления проектами, задачами и командами, разработанное на Spring Boot.
 
-## 🚀 Функциональность
+## Функциональность
 
 *   **Управление пользователями:** регистрация, аутентификация, просмотр профиля.
 *   **Управление проектами:** создание, просмотр, редактирование проектов.
@@ -58,14 +58,14 @@ docker compose up
 *   **Управление командами:** формирование команд и назначение участников на проекты.
 *   **Система ролей:** базовая система безопасности с разграничением доступа.
 
-## 🛠 Технологический стек
+## Технологический стек
 
 *   **Backend:** Java 22, Spring Boot 3.4.4, Spring Security 3.4.4, Spring Data JPA 3.4.4
 *   **Frontend:** FreeMarker, HTML, CSS, Vanilla JS
 *   **База данных:** PostgreSQL 42.7.5
 *   **Сборка:** Maven, Docker
 
-## 📦 Начало работы
+## Начало работы
 
 ### Установка и запуск
 
