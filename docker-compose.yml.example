@@ -1,0 +1,37 @@
+services:
+  project-management-db:
+    image: postgres:15-alpine
+    container_name: project-management-db
+    environment:
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - project-management-network
+
+  app:
+    build: .
+    container_name: project-management-app
+    environment:
+      SPRING_PROFILES_ACTIVE:
+      SPRING_DATASOURCE_URL:
+      SPRING_DATASOURCE_USERNAME:
+      SPRING_DATASOURCE_PASSWORD:
+    ports:
+      - "8080:8080"
+    depends_on:
+      - project-management-db
+    networks:
+      - project-management-network
+
+volumes:
+  postgres_data:
+
+networks:
+  project-management-network:
+    driver: bridge
