@@ -12,21 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- * @Author: Markelloww
- */
-
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
+    public static final String ERROR = "error";
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
-    public String loginPage(@RequestParam(value = "error", required = false) String error,
+    public String loginPage(@RequestParam(value = ERROR, required = false) String error,
                             Model model) {
         if (error != null) {
-            model.addAttribute("error", "Неверный e-mail или пароль");
+            model.addAttribute(ERROR, "Неверный e-mail или пароль");
         }
         return "login";
     }
@@ -34,7 +32,7 @@ public class AuthController {
     @GetMapping("/reg")
     public String regPage(@RequestParam(value = "msg", required = false) String error, Model model) {
         if (error != null) {
-            model.addAttribute("error", "Пользователь с таким e-mail уже зарегистрирован!");
+            model.addAttribute(ERROR, "Пользователь с таким e-mail уже зарегистрирован!");
         }
         return "reg";
     }
@@ -47,7 +45,7 @@ public class AuthController {
                                @RequestParam("lastname") String lastname,
                                RedirectAttributes redirectAttributes) {
         if (userRepository.findByEmail(username).isPresent()) {
-            redirectAttributes.addAttribute("msg", "error");
+            redirectAttributes.addAttribute("msg", ERROR);
             return "redirect:/reg";
         }
 

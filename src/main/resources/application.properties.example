@@ -2,8 +2,8 @@ spring.application.name=project management
 spring.profiles.active=dev
 
 # database
-spring.datasource.url=jdbc:postgresql://localhost:5432/management
-spring.datasource.username=admin
-spring.datasource.password=admin
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true

@@ -12,20 +12,17 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * @Author: Markelloww
- */
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/team/{teamId}/project")
 public class ProjectController {
+    public static final String REDIRECT = "redirect:/";
+
     private final TeamService teamService;
     private final ProjectService projectService;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final TaskStatusService taskStatusService;
     private final TaskService taskService;
-    private final UserService userService;
 
 
     @GetMapping("/{projectId}")
@@ -34,7 +31,7 @@ public class ProjectController {
                               Principal principal,
                               Model model) {
         if (!teamService.checkUser(teamId, principal.getName())) {
-            return "redirect:/";
+            return REDIRECT;
         }
 
         Project project = projectService.getProjectById(projectId);
@@ -58,7 +55,7 @@ public class ProjectController {
     @GetMapping("/new")
     public String showProjectCreate(@PathVariable Long teamId, Model model, Principal principal) {
         if (!teamService.checkUser(teamId, principal.getName())) {
-            return "redirect:/";
+            return REDIRECT;
         }
         model.addAttribute("team", teamService.getTeamById(teamId));
         return "project-new";
@@ -67,7 +64,7 @@ public class ProjectController {
     @PostMapping("/new")
     public String createProject(@PathVariable Long teamId, Project project, Principal principal) {
         if (!teamService.checkUser(teamId, principal.getName())) {
-            return "redirect:/";
+            return REDIRECT;
         }
         projectService.createProject(project, teamId, principal);
         return "redirect:/team/" + teamId;

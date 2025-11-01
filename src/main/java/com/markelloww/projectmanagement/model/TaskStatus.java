@@ -8,10 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @Author: Markelloww
- */
-
 @Entity
 @Table(name = "task_status")
 @Data

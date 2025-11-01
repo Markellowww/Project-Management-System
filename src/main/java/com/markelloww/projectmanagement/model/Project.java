@@ -7,10 +7,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @Author: Markelloww
- */
-
 @Entity
 @Table(name = "projects")
 @Data

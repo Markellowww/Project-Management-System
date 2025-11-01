@@ -2,11 +2,9 @@ package com.markelloww.projectmanagement.controller;
 
 import com.markelloww.projectmanagement.model.Team;
 import com.markelloww.projectmanagement.model.User;
-import com.markelloww.projectmanagement.repository.UserRepository;
 import com.markelloww.projectmanagement.service.TeamService;
 import com.markelloww.projectmanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -16,13 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 
-/**
- * @Author: Markelloww
- */
-
 @Controller
 @RequiredArgsConstructor
 public class TeamController {
+    public static final String REDIRECT_TEAM = "redirect:/team/";
+
     private final UserService userService;
     private final TeamService teamService;
 
@@ -67,18 +63,18 @@ public class TeamController {
     @PostMapping("/team/{teamId}/join")
     public String joinTeam(@PathVariable Long teamId, Principal principal) {
         teamService.joinTeam(teamId, userService.getUserByEmail(principal.getName()));
-        return "redirect:/team/" + teamId;
+        return REDIRECT_TEAM + teamId;
     }
 
     @PostMapping("/team/{teamId}/leave")
     public String leaveTeam(@PathVariable Long teamId, Principal principal) {
         teamService.leaveTeam(teamId, userService.getUserByEmail(principal.getName()));
-        return "redirect:/team/" + teamId;
+        return REDIRECT_TEAM + teamId;
     }
 
     @PostMapping("/team/{teamId}/kick/{userId}")
     public String removeMember(@PathVariable Long teamId, @PathVariable Long userId) {
         teamService.leaveTeam(teamId, userService.getUserById(userId));
-        return "redirect:/team/" + teamId;
+        return REDIRECT_TEAM + teamId;
     }
 }

@@ -5,10 +5,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * @Author: Markelloww
- */
-
 @Entity
 @Table(name = "tasks")
 @Data

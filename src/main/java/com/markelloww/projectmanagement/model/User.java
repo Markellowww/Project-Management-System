@@ -6,10 +6,6 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @Author: Markelloww
- */
-
 @Entity
 @Table(name = "users")
 @Data
